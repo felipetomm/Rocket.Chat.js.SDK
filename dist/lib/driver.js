@@ -386,8 +386,8 @@ function reactToMessages(callback) {
         if (changedMessageQuery.result && changedMessageQuery.result.length > 0) {
             const changedMessage = changedMessageQuery.result[0];
             if (Array.isArray(changedMessage.args)) {
-                log_1.logger.info(`[received] Message in room ${changedMessage.args[0].rid}`);
-                callback(null, changedMessage.args[0], changedMessage.args[1]);
+                log_1.logger.info(`[received] Message in room ${changedMessage.args[0][0].rid}`);
+                callback(null, changedMessage.args[0][0], changedMessage.args[1]);
             }
             else {
                 log_1.logger.debug('[received] Update without message args');
@@ -439,6 +439,10 @@ function respondToMessages(callback, options = {}) {
             log_1.logger.error(`[received] Unable to receive: ${err.message}`);
             callback(err); // bubble errors back to adapter
         }
+
+        // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array        
+        message = Array.isArray(message) ? message[0] : message;
+
         // Ignore bot's own messages
         if (message.u._id === exports.userId)
             return;
