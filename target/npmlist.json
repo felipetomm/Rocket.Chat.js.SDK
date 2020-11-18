@@ -1,0 +1,80 @@
+{
+    "name": "rocketchat-js-sdk",
+    "version": "0.2.9-1",
+    "dependencies": {
+        "@types/lru-cache": {
+            "version": "4.1.0"
+        },
+        "@types/node": {
+            "version": "9.4.6"
+        },
+        "asteroid": {
+            "version": "0.6.1",
+            "dependencies": {
+                "ddp.js": {
+                    "version": "0.5.0"
+                },
+                "faye-websocket": {
+                    "version": "0.11.3",
+                    "dependencies": {
+                        "websocket-driver": {
+                            "version": "0.7.4",
+                            "dependencies": {
+                                "http-parser-js": {
+                                    "version": "0.5.2"
+                                },
+                                "safe-buffer": {
+                                    "version": "5.1.1"
+                                },
+                                "websocket-extensions": {
+                                    "version": "0.1.4"
+                                }
+                            }
+                        }
+                    }
+                },
+                "q": {
+                    "version": "1.5.1"
+                }
+            }
+        },
+        "lru-cache": {
+            "version": "4.1.1",
+            "dependencies": {
+                "pseudomap": {
+                    "version": "1.0.2"
+                },
+                "yallist": {
+                    "version": "2.1.2"
+                }
+            }
+        },
+        "node-rest-client": {
+            "version": "3.1.0",
+            "dependencies": {
+                "follow-redirects": {
+                    "version": "1.13.0"
+                },
+                "debug": {
+                    "version": "2.2.0",
+                    "dependencies": {
+                        "ms": {
+                            "version": "0.7.1"
+                        }
+                    }
+                },
+                "xml2js": {
+                    "version": "0.4.23",
+                    "dependencies": {
+                        "sax": {
+                            "version": "1.2.4"
+                        },
+                        "xmlbuilder": {
+                            "version": "11.0.1"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

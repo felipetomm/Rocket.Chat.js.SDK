@@ -386,8 +386,9 @@ function reactToMessages(callback) {
         if (changedMessageQuery.result && changedMessageQuery.result.length > 0) {
             const changedMessage = changedMessageQuery.result[0];
             if (Array.isArray(changedMessage.args)) {
-                log_1.logger.info(`[received] Message in room ${changedMessage.args[0][0].rid}`);
-                callback(null, changedMessage.args[0][0], changedMessage.args[1]);
+                const messageArgs = Array.isArray(changedMessage.args[0]) ? changedMessage.args[0][0] : changedMessage.args[0];
+                log_1.logger.info(`[received] Message in room ${messageArgs.rid}`);
+                callback(null, messageArgs, changedMessage.args[1]);
             }
             else {
                 log_1.logger.debug('[received] Update without message args');

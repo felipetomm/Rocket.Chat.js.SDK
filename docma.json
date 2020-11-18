@@ -61,7 +61,7 @@
                     {
                         "iconClass": "fab fa-rocketchat",
                         "label": "",
-                        "href": "https://github.com/RocketChat/Rocket.Chat.js.SDK",
+                        "href": "https://github.com/felipetomm/Rocket.Chat.js.SDK",
                         "target": "_blank"
                     }
                 ]
