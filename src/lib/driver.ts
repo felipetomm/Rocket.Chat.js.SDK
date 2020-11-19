@@ -344,8 +344,9 @@ export function reactToMessages (callback: ICallback): void {
     if (changedMessageQuery.result && changedMessageQuery.result.length > 0) {
       const changedMessage = changedMessageQuery.result[0]
       if (Array.isArray(changedMessage.args)) {
-        logger.info(`[received] Message in room ${ changedMessage.args[0].rid }`)
-        callback(null, changedMessage.args[0], changedMessage.args[1])
+        let messageArgs = Array.isArray(changedMessage.args[0]) ? changedMessage.args[0][0] : changedMessage.args[0]
+        logger.info(`[received] Message in room ${ messageArgs.rid }`)
+        callback(null, messageArgs, changedMessage.args[1])
       } else {
         logger.debug('[received] Update without message args')
       }
@@ -393,6 +394,9 @@ export function respondToMessages (
       callback(err) // bubble errors back to adapter
     }
 
+    // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array
+    message = Array.isArray(message) ? message[0] : message
+
     // Ignore bot's own messages
     if (message.u._id === userId) return
 
@@ -411,7 +415,10 @@ export function respondToMessages (
     let currentReadTime = new Date(message.ts.$date)
 
     // Ignore edited messages if configured to
-    if (!config.edited && message.editedAt) return
+    if (!config.edited && message.editedAt) {
+      console.log('ignorando mensagem editada')
+      return
+    }
 
     // Set read time as time of edit, if message is edited
     if (message.editedAt) currentReadTime = new Date(message.editedAt.$date)

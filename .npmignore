@@ -1,0 +1,12 @@
+/src
+/test
+/.vscode
+/coverage
+/node_modules
+/yarn*
+/.nyc_output
+/.env
+/shrinkwrap.yaml
+/package-lock.json
+/docs/
+.DS_Store

@@ -13,7 +13,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
     result["default"] = mod;
     return result;
-}
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_rest_client_1 = require("node-rest-client");
 const settings = __importStar(require("./settings"));
@@ -48,6 +48,7 @@ function getQueryString(data) {
 exports.getQueryString = getQueryString;
 /** Setup default headers with empty auth for now */
 exports.basicHeaders = { 'Content-Type': 'application/json' };
+// export const authHeaders = { 'X-Auth-Token': '', 'X-User-Id': '' }
 exports.authHeaders = { 'X-Auth-Token': '', 'X-User-Id': '' };
 /** Populate auth headers (from response data on login) */
 function setAuth(authData) {
@@ -186,6 +187,7 @@ function login(user = {
             return result;
         }
         else {
+            console.log(user);
             throw new Error(`[API] Login failed for ${user.username}`);
         }
     });

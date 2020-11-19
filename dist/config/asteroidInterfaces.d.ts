@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events';
 /**
  * Asteroid DDP - add known properties to avoid TS lint errors

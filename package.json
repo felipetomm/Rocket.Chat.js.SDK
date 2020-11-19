@@ -1,11 +1,11 @@
 {
-  "name": "@rocket.chat/sdk",
+  "name": "rocketchat-js-sdk",
   "version": "0.2.9-1",
   "description": "Node.js SDK for Rocket.Chat. Application interface for server methods and message streams.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/RocketChat/Rocket.Chat.js.SDK.git",
-  "author": "Tim Kinnane <tim.kinnane@rocket.chat>",
+  "repository": "https://github.com/felipetomm/Rocket.Chat.js.SDK.git",
+  "author": "Felipe Tomm <felipe.tomm@gmail.com>",
   "license": "MIT",
   "private": false,
   "keywords": [
@@ -28,7 +28,7 @@
     "pretest": "tslint -p . && ts-node src/utils/setup.ts",
     "test": "nyc mocha './src/lib/**/*.spec.ts'",
     "test:hook": "mocha './**/*.spec.ts'",
-    "test:debug": "mocha  --inspect --debug-brk 'src/**/*.spec.ts'",
+    "test:debug": "mocha --inspect --debug-brk 'src/**/*.spec.ts'",
     "test:package": "preview && mocha 'src/index.spec.ts'",
     "start": "ts-node ./src/utils/start",
     "docs": "rimraf ./docs && typedoc --options ./typedoc.json ./src/lib",

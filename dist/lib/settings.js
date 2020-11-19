@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // Login settings - LDAP needs to be explicitly enabled
 exports.username = process.env.ROCKETCHAT_USER || 'bot';
-exports.password = process.env.ROCKETCHAT_PASSWORD || 'pass';
+exports.password = process.env.ROCKETCHAT_PASSWORD || 'bot';
 exports.ldap = (process.env.ROCKETCHAT_AUTH === 'ldap');
 // Connection settings - Enable SSL by default if Rocket.Chat URL contains https
 exports.host = process.env.ROCKETCHAT_URL || 'localhost:3000';

@@ -20,6 +20,10 @@ export let currentLogin: {
   authToken: string,
   result: ILoginResultAPI
 } | null = null
+export interface IAuthHeaders {
+  'X-Auth-Token'?: string,
+  'X-User-Id'?: string
+}
 
 /** Check for existing login */
 export function loggedIn (): boolean {
@@ -51,7 +55,8 @@ export function getQueryString (data: any) {
 
 /** Setup default headers with empty auth for now */
 export const basicHeaders = { 'Content-Type': 'application/json' }
-export const authHeaders = { 'X-Auth-Token': '', 'X-User-Id': '' }
+// export const authHeaders = { 'X-Auth-Token': '', 'X-User-Id': '' }
+export const authHeaders: IAuthHeaders = { 'X-Auth-Token': '', 'X-User-Id': '' }
 
 /** Populate auth headers (from response data on login) */
 export function setAuth (authData: {authToken: string, userId: string}) {
@@ -188,6 +193,7 @@ export async function login (user: ILoginCredentials = {
     logger.info(`[API] Logged in ID ${ currentLogin.userId }`)
     return result
   } else {
+    console.log(user)
     throw new Error(`[API] Login failed for ${user.username}`)
   }
 }

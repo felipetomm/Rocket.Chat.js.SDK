@@ -17,6 +17,10 @@ export declare let currentLogin: {
     authToken: string;
     result: ILoginResultAPI;
 } | null;
+export interface IAuthHeaders {
+    'X-Auth-Token'?: string;
+    'X-User-Id'?: string;
+}
 /** Check for existing login */
 export declare function loggedIn(): boolean;
 /** Initialise client and configs */
@@ -33,10 +37,7 @@ export declare function getQueryString(data: any): string;
 export declare const basicHeaders: {
     'Content-Type': string;
 };
-export declare const authHeaders: {
-    'X-Auth-Token': string;
-    'X-User-Id': string;
-};
+export declare const authHeaders: IAuthHeaders;
 /** Populate auth headers (from response data on login) */
 export declare function setAuth(authData: {
     authToken: string;
