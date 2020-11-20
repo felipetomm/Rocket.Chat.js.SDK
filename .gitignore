@@ -1,7 +1,6 @@
 .DS_Store
 /.env
 /.nyc_output
-/.nyc_output
 /.vscode
 /coverage
 /docs/
