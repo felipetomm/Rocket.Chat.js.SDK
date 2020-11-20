@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events'
 import Asteroid from 'asteroid'
 import * as settings from './settings'
