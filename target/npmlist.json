@@ -1,6 +1,6 @@
 {
     "name": "rocketchat-js-sdk",
-    "version": "0.2.9-1",
+    "version": "0.2.9-2",
     "dependencies": {
         "@types/lru-cache": {
             "version": "4.1.0"

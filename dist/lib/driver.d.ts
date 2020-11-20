@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { EventEmitter } from 'events';
 import { Message } from './message';
 import { IConnectOptions, IRespondOptions, ICallback, ILogger } from '../config/driverInterfaces';
