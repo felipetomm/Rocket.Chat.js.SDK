@@ -416,10 +416,7 @@ export function respondToMessages (
     let currentReadTime = new Date(message.ts.$date)
 
     // Ignore edited messages if configured to
-    if (!config.edited && message.editedAt) {
-      console.log('ignorando mensagem editada')
-      return
-    }
+    if (!config.edited && message.editedAt) return
 
     // Set read time as time of edit, if message is edited
     if (message.editedAt) currentReadTime = new Date(message.editedAt.$date)

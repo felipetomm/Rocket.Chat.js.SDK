@@ -193,7 +193,6 @@ export async function login (user: ILoginCredentials = {
     logger.info(`[API] Logged in ID ${ currentLogin.userId }`)
     return result
   } else {
-    console.log(user)
     throw new Error(`[API] Login failed for ${user.username}`)
   }
 }
