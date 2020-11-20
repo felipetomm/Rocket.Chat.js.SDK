@@ -18,6 +18,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference types="node" />
 const events_1 = require("events");
 const asteroid_1 = __importDefault(require("asteroid"));
 const settings = __importStar(require("./settings"));

@@ -3,6 +3,19 @@
 [rest]: https://rocket.chat/docs/developer-guides/rest-api/
 [start]: https://github.com/RocketChat/Rocket.Chat.js.SDK/blob/master/src/utils/start.ts
 
+# About this repo
+
+This repo is a fork of [official Rocket Chat SDK](https://github.com/RocketChat/Rocket.Chat.js.SDK). I need make this because a new version of RocketChat Server (3.8.0) has broken the SDK reactToMessages.  
+With this, our project's has affected and need urgently fixes.  
+Official repo and NPM Package are "non official" discontinued.
+
+How i say above, my intention is to mantain an functional version of SDK. This version is recently published in [NPMJS](https://www.npmjs.com/package/rocketchat-js-sdk).
+I have tested with RocketChat 3.7.0, 3.7.1 and 3.8.0.
+
+For publishing, many of tests has been skipped because instable errors, like timeout and others. If you can, i need help to with this unit tests.
+
+I make an HOW TO for run allthe tests. You can see them here in root folder: **HOW-TO-TESTS.md**!
+
 # Rocket.Chat Node.js SDK
 
 Application interface for server methods and message stream subscriptions.
