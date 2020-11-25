@@ -358,42 +358,30 @@ function respondToMessages(callback, options = {}) {
         // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array
         message = Array.isArray(message) ? message[0] : message;
         // Ignore bot's own messages
-        if (message.u._id === exports.userId) {
-            log_1.logger.info(`[ignored][userid] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (message.u._id === exports.userId)
             return;
-        }
         // Ignore DMs unless configured not to
         const isDM = meta.roomType === 'd';
-        if (isDM && !config.dm) {
-            log_1.logger.info(`[ignored][dm] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (isDM && !config.dm)
             return;
-        }
         // Ignore Livechat unless configured not to
         const isLC = meta.roomType === 'l';
-        if (isLC && !config.livechat) {
-            log_1.logger.info(`[ignored][livechat] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (isLC && !config.livechat)
             return;
-        }
         // Ignore messages in un-joined public rooms unless configured not to - Add isLC after RC version 3.8.0.
-        if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant) {
-            log_1.logger.info(`[ignored][allpublic] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant)
             return;
-        }
         // Set current time for comparison to incoming
         let currentReadTime = new Date(message.ts.$date);
         // Ignore edited messages if configured to
-        if (!config.edited && message.editedAt) {
-            log_1.logger.info(`[ignored][edited] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (!config.edited && message.editedAt)
             return;
-        }
         // Set read time as time of edit, if message is edited
         if (message.editedAt)
             currentReadTime = new Date(message.editedAt.$date);
         // Ignore messages in stream that aren't new
-        if (currentReadTime <= exports.lastReadTime) {
-            log_1.logger.info(`[ignored][time] Message in room ${message.rid}: ${JSON.stringify(message)}`);
+        if (currentReadTime <= exports.lastReadTime)
             return;
-        }
         // At this point, message has passed checks and can be responded to
         log_1.logger.info(`[received] Message ${message._id} from ${message.u.username}`);
         exports.lastReadTime = currentReadTime;
