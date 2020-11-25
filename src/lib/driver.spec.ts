@@ -181,7 +181,8 @@ describe('driver', () => {
         actions: [
           { type: 'button', text: 'Action 1', msg: 'Testing Action 1', msg_in_chat_window: true },
           { type: 'button', text: 'Action 2', msg: 'Testing Action 2', msg_in_chat_window: true }
-        ]
+        ],
+        ts: '1970-01-01T00:00:00.000Z'
       }]
       await driver.sendMessage({
         rid: tId,
