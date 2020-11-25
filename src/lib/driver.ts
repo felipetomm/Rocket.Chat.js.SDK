@@ -400,27 +400,27 @@ export function respondToMessages (
 
     // Ignore bot's own messages
     if (message.u._id === userId) {
-      logger.info(`[ignored][userid] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][userid] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
     // Ignore DMs unless configured not to
     const isDM = meta.roomType === 'd'
     if (isDM && !config.dm) {
-      logger.info(`[ignored][dm] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][dm] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
     // Ignore Livechat unless configured not to
     const isLC = meta.roomType === 'l'
     if (isLC && !config.livechat) {
-      logger.info(`[ignored][livechat] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][livechat] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
     // Ignore messages in un-joined public rooms unless configured not to
     if (!config.allPublic && !isDM && !meta.roomParticipant) {
-      logger.info(`[ignored][allpublic] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][allpublic] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
@@ -429,7 +429,7 @@ export function respondToMessages (
 
     // Ignore edited messages if configured to
     if (!config.edited && message.editedAt) {
-      logger.info(`[ignored][edited] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][edited] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
@@ -438,7 +438,7 @@ export function respondToMessages (
 
     // Ignore messages in stream that aren't new
     if (currentReadTime <= lastReadTime) {
-      logger.info(`[ignored][time] Message in room ${ message.rid }: ${ message }`)
+      logger.info(`[ignored][time] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
       return
     }
 
