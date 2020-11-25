@@ -399,48 +399,30 @@ export function respondToMessages (
     message = Array.isArray(message) ? message[0] : message
 
     // Ignore bot's own messages
-    if (message.u._id === userId) {
-      logger.info(`[ignored][userid] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (message.u._id === userId) return
 
     // Ignore DMs unless configured not to
     const isDM = meta.roomType === 'd'
-    if (isDM && !config.dm) {
-      logger.info(`[ignored][dm] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (isDM && !config.dm) return
 
     // Ignore Livechat unless configured not to
     const isLC = meta.roomType === 'l'
-    if (isLC && !config.livechat) {
-      logger.info(`[ignored][livechat] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (isLC && !config.livechat) return
 
     // Ignore messages in un-joined public rooms unless configured not to - Add isLC after RC version 3.8.0.
-    if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant) {
-      logger.info(`[ignored][allpublic] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant) return
 
     // Set current time for comparison to incoming
     let currentReadTime = new Date(message.ts.$date)
 
     // Ignore edited messages if configured to
-    if (!config.edited && message.editedAt) {
-      logger.info(`[ignored][edited] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (!config.edited && message.editedAt) return
 
     // Set read time as time of edit, if message is edited
     if (message.editedAt) currentReadTime = new Date(message.editedAt.$date)
 
     // Ignore messages in stream that aren't new
-    if (currentReadTime <= lastReadTime) {
-      logger.info(`[ignored][time] Message in room ${ message.rid }: ${ JSON.stringify(message) }`)
-      return
-    }
+    if (currentReadTime <= lastReadTime) return
 
     // At this point, message has passed checks and can be responded to
     logger.info(`[received] Message ${message._id} from ${message.u.username}`)
