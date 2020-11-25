@@ -320,7 +320,7 @@ function reactToMessages(callback) {
             }
         }
         else {
-            log_1.logger.debug('[received] Reactive query at ID ${ _id } without results');
+            log_1.logger.debug(`[received] Reactive query at ID ${_id} without results`);
         }
     });
 }
@@ -374,8 +374,8 @@ function respondToMessages(callback, options = {}) {
             log_1.logger.info(`[ignored][livechat] Message in room ${message.rid}: ${JSON.stringify(message)}`);
             return;
         }
-        // Ignore messages in un-joined public rooms unless configured not to
-        if (!config.allPublic && !isDM && !meta.roomParticipant) {
+        // Ignore messages in un-joined public rooms unless configured not to - Add isLC after RC version 3.8.0.
+        if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant) {
             log_1.logger.info(`[ignored][allpublic] Message in room ${message.rid}: ${JSON.stringify(message)}`);
             return;
         }
