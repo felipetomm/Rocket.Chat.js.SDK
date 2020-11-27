@@ -6,7 +6,6 @@ import { IMessage } from '../config/messageInterfaces';
 import { IMessageReceiptAPI } from '../utils/interfaces';
 /** Internal for comparing message update timestamps */
 export declare let lastReadTime: Date;
-export declare const eventMessages: string[];
 /**
  * The integration property is applied as an ID on sent messages `bot.i` param
  * Should be replaced when connection is invoked by a package using the SDK
@@ -99,6 +98,11 @@ export declare function logout(): Promise<void | null>;
 export declare function subscribe(topic: string, roomId: string): Promise<ISubscription>;
 /** Unsubscribe from Meteor subscription */
 export declare function unsubscribe(subscription: ISubscription): void;
+/**
+ * Get Subscription by room id
+ * @param rid Room id for filter subscriptions
+ */
+export declare function getSubscription(rid: string): ISubscription[];
 /** Unsubscribe from all subscriptions in collection */
 export declare function unsubscribeAll(): void;
 /**

@@ -28,7 +28,6 @@ const log_1 = require("./log");
 /** Collection names */
 const _messageCollectionName = 'stream-room-messages';
 const _messageStreamName = '__my_messages__';
-exports.eventMessages = ['connected', 'promptTranscript'];
 /**
  * The integration property is applied as an ID on sent messages `bot.i` param
  * Should be replaced when connection is invoked by a package using the SDK
@@ -265,6 +264,17 @@ function unsubscribe(subscription) {
     log_1.logger.info(`[${subscription.id}] Unsubscribed`);
 }
 exports.unsubscribe = unsubscribe;
+/**
+ * Get Subscription by room id
+ * @param rid Room id for filter subscriptions
+ */
+function getSubscription(rid) {
+    const response = exports.subscriptions.filter(function (sub) {
+        return sub.id = rid;
+    });
+    return response;
+}
+exports.getSubscription = getSubscription;
 /** Unsubscribe from all subscriptions in collection */
 function unsubscribeAll() {
     exports.subscriptions.map((s) => unsubscribe(s));
@@ -358,6 +368,15 @@ function respondToMessages(callback, options = {}) {
         }
         // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array
         message = Array.isArray(message) ? message[0] : message;
+        let { t } = message;
+        const doUnsubscribe = ((t === 'ul' && (message.u._id === exports.userId)) || (t === 'uj' && meta.roomParticipant));
+        if (doUnsubscribe) {
+            const subscription = getSubscription(message.rid);
+            subscription.forEach(sub => {
+                unsubscribe(sub);
+            });
+            return;
+        }
         // Ignore bot's own messages
         if (message.u._id === exports.userId)
             return;
@@ -371,8 +390,6 @@ function respondToMessages(callback, options = {}) {
             return;
         // Ignore messages in un-joined public rooms unless configured not to - Add isLC after RC version 3.8.0.
         if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant)
-            return;
-        if (exports.eventMessages.includes(message.msg))
             return;
         // Set current time for comparison to incoming
         let currentReadTime = new Date(message.ts.$date);

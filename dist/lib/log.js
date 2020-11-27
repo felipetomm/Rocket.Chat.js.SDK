@@ -1,21 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+function getDateTime() {
+    const date = new Date();
+    const response = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    return response;
+}
 /** Temp logging, should override form adapter's log */
 class InternalLog {
     debug(...args) {
-        console.log(...args);
+        console.log([`[debug] ${getDateTime()}: `, ...args]);
     }
     info(...args) {
-        console.log(...args);
+        console.log([`[info] ${getDateTime()}: `, ...args]);
     }
     warning(...args) {
-        console.warn(...args);
+        console.warn([`[warning] ${getDateTime()}: `, ...args]);
     }
     warn(...args) {
         return this.warning(...args);
     }
     error(...args) {
-        console.error(...args);
+        console.error([`[error] ${getDateTime()}: `, ...args]);
     }
 }
 let logger = new InternalLog();

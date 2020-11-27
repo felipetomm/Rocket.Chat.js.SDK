@@ -1,21 +1,27 @@
 import { ILogger } from '../config/driverInterfaces'
 
+function getDateTime (): string {
+  const date = new Date()
+  const response = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  return response
+}
+
 /** Temp logging, should override form adapter's log */
 class InternalLog implements ILogger {
   debug (...args: any[]) {
-    console.log([`[debug] ${Date.now()}: `,...args])
+    console.log(...args)
   }
   info (...args: any[]) {
-    console.log([`[info] ${Date.now()}: `,...args])
+    console.log(...args)
   }
   warning (...args: any[]) {
-    console.warn([`[warning] ${Date.now()}: `,...args])
+    console.warn(...args)
   }
   warn (...args: any[]) { // legacy method
     return this.warning(...args)
   }
   error (...args: any[]) {
-    console.error([`[error] ${Date.now()}: `,...args])
+    console.error(...args)
   }
 }
 
