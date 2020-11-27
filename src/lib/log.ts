@@ -3,19 +3,19 @@ import { ILogger } from '../config/driverInterfaces'
 /** Temp logging, should override form adapter's log */
 class InternalLog implements ILogger {
   debug (...args: any[]) {
-    console.log(...args)
+    console.log([`[debug] ${Date.now()}: `,...args])
   }
   info (...args: any[]) {
-    console.log(...args)
+    console.log([`[info] ${Date.now()}: `,...args])
   }
   warning (...args: any[]) {
-    console.warn(...args)
+    console.warn([`[warning] ${Date.now()}: `,...args])
   }
   warn (...args: any[]) { // legacy method
     return this.warning(...args)
   }
   error (...args: any[]) {
-    console.error(...args)
+    console.error([`[error] ${Date.now()}: `,...args])
   }
 }
 

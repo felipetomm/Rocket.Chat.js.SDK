@@ -6,6 +6,7 @@ import { IMessage } from '../config/messageInterfaces';
 import { IMessageReceiptAPI } from '../utils/interfaces';
 /** Internal for comparing message update timestamps */
 export declare let lastReadTime: Date;
+export declare const eventMessages: string[];
 /**
  * The integration property is applied as an ID on sent messages `bot.i` param
  * Should be replaced when connection is invoked by a package using the SDK

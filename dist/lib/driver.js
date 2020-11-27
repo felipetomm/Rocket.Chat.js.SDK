@@ -28,6 +28,7 @@ const log_1 = require("./log");
 /** Collection names */
 const _messageCollectionName = 'stream-room-messages';
 const _messageStreamName = '__my_messages__';
+exports.eventMessages = ['connected', 'promptTranscript'];
 /**
  * The integration property is applied as an ID on sent messages `bot.i` param
  * Should be replaced when connection is invoked by a package using the SDK
@@ -370,6 +371,8 @@ function respondToMessages(callback, options = {}) {
             return;
         // Ignore messages in un-joined public rooms unless configured not to - Add isLC after RC version 3.8.0.
         if (!config.allPublic && !isDM && !isLC && !meta.roomParticipant)
+            return;
+        if (exports.eventMessages.includes(message.msg))
             return;
         // Set current time for comparison to incoming
         let currentReadTime = new Date(message.ts.$date);

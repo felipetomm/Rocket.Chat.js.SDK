@@ -297,6 +297,17 @@ export function unsubscribe (subscription: ISubscription): void {
   logger.info(`[${subscription.id}] Unsubscribed`)
 }
 
+/**
+ * Get Subscription by room id
+ * @param rid Room id for filter subscriptions
+ */
+export function getSubscription (rid: string): ISubscription[] {
+  const response = subscriptions.filter(function (sub) {
+    return sub.id = rid
+  })
+  return response
+}
+
 /** Unsubscribe from all subscriptions in collection */
 export function unsubscribeAll (): void {
   subscriptions.map((s: ISubscription) => unsubscribe(s))
@@ -397,6 +408,16 @@ export function respondToMessages (
 
     // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array
     message = Array.isArray(message) ? message[0] : message
+
+    let { t } = message
+    const doUnsubscribe = ((t === 'ul' && (message.u._id === userId)) || (t === 'uj' && meta.roomParticipant))
+    if (doUnsubscribe) {
+      const subscription = getSubscription(message.rid)
+      subscription.forEach(sub => {
+        unsubscribe(sub)
+      })
+      return
+    }
 
     // Ignore bot's own messages
     if (message.u._id === userId) return
