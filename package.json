@@ -1,6 +1,6 @@
 {
   "name": "rocketchat-js-sdk",
-  "version": "0.2.9-8",
+  "version": "0.2.9-9",
   "description": "Node.js Forked SDK for Rocket.Chat. Application interface for server methods and message streams.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
