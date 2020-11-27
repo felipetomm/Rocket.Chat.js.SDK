@@ -410,7 +410,7 @@ export function respondToMessages (
     message = Array.isArray(message) ? message[0] : message
 
     let { t } = message
-    const doUnsubscribe = ((t === 'ul' && (message.u._id === userId)) || (t === 'uj' && meta.roomParticipant))
+    const doUnsubscribe = ((t === 'ul' && (message.u._id === userId)) || (t === 'uj' && meta.roomParticipant) || (t === 'livechat-close') || (t === 'command'))
     if (doUnsubscribe) {
       const subscription = getSubscription(message.rid)
       subscription.forEach(sub => {
