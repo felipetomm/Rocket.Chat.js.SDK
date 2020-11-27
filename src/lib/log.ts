@@ -1,11 +1,5 @@
 import { ILogger } from '../config/driverInterfaces'
 
-function getDateTime (): string {
-  const date = new Date()
-  const response = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-  return response
-}
-
 /** Temp logging, should override form adapter's log */
 class InternalLog implements ILogger {
   debug (...args: any[]) {
