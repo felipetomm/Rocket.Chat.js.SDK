@@ -369,7 +369,7 @@ function respondToMessages(callback, options = {}) {
         // In RocketChat Server ^3.8.0, the message has changed for Object to an Array. Get only first pos of array
         message = Array.isArray(message) ? message[0] : message;
         let { t } = message;
-        const doUnsubscribe = ((t === 'ul' && (message.u._id === exports.userId)) || (t === 'uj' && meta.roomParticipant));
+        const doUnsubscribe = ((t === 'ul' && (message.u._id === exports.userId)) || (t === 'uj' && meta.roomParticipant) || (t === 'livechat-close') || (t === 'command'));
         if (doUnsubscribe) {
             const subscription = getSubscription(message.rid);
             subscription.forEach(sub => {
